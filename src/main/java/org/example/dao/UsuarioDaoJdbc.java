@@ -40,4 +40,16 @@ public class UsuarioDaoJdbc {
         }
     }
 
+    public boolean deletar(Usuario usuario) throws SQLException,
+            IOException, ClassNotFoundException {
+        try(Connection con = new ConnectionFactory().getConnection()){
+            PreparedStatement stmt = con.prepareStatement(
+                    "DELETE FROM usuario WHERE email=?"
+            );
+            stmt.setString(1, usuario.getEmail());
+            return stmt.executeUpdate()>0;
+        }
+    }
+
+
 }
