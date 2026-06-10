@@ -11,12 +11,12 @@ public class Main {
         UsuarioDaoJdbc dao = new UsuarioDaoJdbc();
 
         try{
-            if(dao.salvar(new Usuario("pedro@gmail.com","Pedro"))){
+            if(dao.atualizar(new Usuario("joao@gmail.com","654321"))){
                 JOptionPane.showMessageDialog(null,
-                        "Salvo com sucesso");
+                        "Atualizado com sucesso");
             }else{
                 JOptionPane.showMessageDialog(null,
-                        "Falha ao salvar");
+                        "Falha ao atualizar");
             }
         } catch (Exception ex){
             JOptionPane.showMessageDialog(null,

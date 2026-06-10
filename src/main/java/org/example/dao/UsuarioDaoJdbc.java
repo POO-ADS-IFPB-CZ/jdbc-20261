@@ -51,5 +51,16 @@ public class UsuarioDaoJdbc {
         }
     }
 
+    public boolean atualizar(Usuario usuario) throws SQLException,
+            IOException, ClassNotFoundException {
+        try(Connection con = new ConnectionFactory().getConnection()){
+            PreparedStatement stmt = con.prepareStatement(
+                    "UPDATE usuario SET senha=? WHERE email=?"
+            );
+            stmt.setString(1, usuario.getSenha());
+            stmt.setString(2, usuario.getEmail());
+            return stmt.executeUpdate()>0;
+        }
+    }
 
 }
