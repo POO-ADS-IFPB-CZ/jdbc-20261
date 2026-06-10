@@ -1,26 +1,19 @@
 package org.example;
 
-import org.example.database.ConnectionFactory;
+import org.example.dao.UsuarioDaoJdbc;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
+import javax.swing.*;
 
 public class Main {
     static void main() {
 
-        try {
-            Connection connection = new ConnectionFactory()
-                    .getConnection();
-            if(connection!=null){
-                System.out.println("Conectado");
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        UsuarioDaoJdbc dao = new UsuarioDaoJdbc();
+
+        try{
+            System.out.println(dao.getUsuariobyEmail("joao@gmail.com"));
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null,
+                    "Falha na conexão com o banco");
         }
 
     }
