@@ -28,4 +28,16 @@ public class UsuarioDaoJdbc {
         return usuario;
     }
 
+    public boolean salvar(Usuario usuario) throws SQLException,
+            IOException, ClassNotFoundException {
+        try(Connection con = new ConnectionFactory().getConnection()){
+            PreparedStatement stmt = con.prepareStatement(
+                    "INSERT INTO usuario (email, senha) VALUES (?,?)"
+            );
+            stmt.setString(1, usuario.getEmail());
+            stmt.setString(2, usuario.getSenha());
+            return stmt.executeUpdate()>0;
+        }
+    }
+
 }
