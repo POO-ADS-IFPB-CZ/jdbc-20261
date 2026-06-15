@@ -35,25 +35,16 @@ public class TelaLogin extends JFrame {
                 usuario = usuarioDao.getUsuariobyEmail(
                         textField1.getText());
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null,
-                        "Falha na conexão com o banco",
-                        "Mensagem de Erro",
-                        JOptionPane.ERROR_MESSAGE);
+                exibirMensagemErro("Falha na conexão com o banco");
             }
             if(usuario == null){
-                JOptionPane.showMessageDialog(null,
-                        "Usuário não encontrado",
-                        "Mensagem de erro",
-                        JOptionPane.ERROR_MESSAGE);
+                exibirMensagemErro("Usuário não encontrado");
             }
             if(usuario != null){
                 String senhaDigitada = new String(
                         passwordField1.getPassword());
                 if(!senhaDigitada.equals(usuario.getSenha())){
-                    JOptionPane.showMessageDialog(null,
-                            "Senha incorreta",
-                            "Mensagem de erro",
-                            JOptionPane.ERROR_MESSAGE);
+                    exibirMensagemErro("Senha incorreta");
                 }else{
                     JOptionPane.showMessageDialog(null,
                             "Bem vindo");
@@ -74,4 +65,12 @@ public class TelaLogin extends JFrame {
                 "img/login.png");
         label1.setIcon(icon);
     }
+
+    private void exibirMensagemErro(String mensagem){
+        JOptionPane.showMessageDialog(null,
+                mensagem,
+                "Mensagem de erro",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
 }
