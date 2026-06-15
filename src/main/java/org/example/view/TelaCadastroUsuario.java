@@ -6,7 +6,9 @@ import org.example.model.Usuario;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.util.Arrays;
 
 public class TelaCadastroUsuario extends JDialog {
@@ -28,7 +30,21 @@ public class TelaCadastroUsuario extends JDialog {
         });
         buttonOK.addActionListener(e ->{
             if(validarFormulario()){
-
+                Usuario usuario = new Usuario(
+                        textField1.getText(),
+                        new String(passwordField1.getPassword())
+                );
+                try{
+                    if(usuarioDao.salvar(usuario)){
+                        JOptionPane.showMessageDialog(null,
+                                "Salvo com sucesso");
+                        dispose();
+                    }
+                } catch (SQLException ex) {
+                    exibirMensagemErro("Usuário já cadastrado");
+                } catch (IOException | ClassNotFoundException ex) {
+                    exibirMensagemErro("Falha na conexão com o banco");
+                }
             }
         });
     }
