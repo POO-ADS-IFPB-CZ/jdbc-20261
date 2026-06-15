@@ -1,6 +1,8 @@
 package org.example.view;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 public class TelaLogin extends JFrame {
@@ -13,7 +15,13 @@ public class TelaLogin extends JFrame {
 
     public TelaLogin() {
         setContentPane(contentPane);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         getRootPane().setDefaultButton(buttonOK);
+        buttonCancel.addActionListener((e)->{
+            TelaCadastroUsuario cadastro = new TelaCadastroUsuario();
+            cadastro.pack();
+            cadastro.setVisible(true);
+        });
     }
 
     public static void main(String[] args) {
